@@ -68,7 +68,7 @@ public class WorkerService {
             return new ResponseData("Worker does not exist", false);
         }
         Optional<Worker> byPhoneNumber = workerRepository.findByPhoneNumber(workerDto.getPhoneNumber());
-        if (byPhoneNumber.isPresent()){
+        if (byPhoneNumber.isPresent()) {
             if (byPhoneNumber.get().isActive())
                 return new ResponseData("Phone number already exist", false);
             workerRepository.delete(byPhoneNumber.get());
@@ -80,6 +80,10 @@ public class WorkerService {
         return new ResponseData("Successfully saved", true, workerDto);
     }
 
+    public Page<Worker> getByWarehouse(Long id, Pageable pageable) {
+        return workerRepository.findAllByWarehouseIdAndActiveTrue(id, pageable);
+    }
+
     private Worker toEntity(WorkerDto workerDto) {
 
         Worker worker = new Worker();
@@ -89,7 +93,7 @@ public class WorkerService {
         worker.setPhoneNumber(workerDto.getPhoneNumber());
         worker.setPassword(workerDto.getPassword());
 
-        if (workerDto.getWarehousesId() != null){
+        if (workerDto.getWarehousesId() != null) {
             Set<Warehouse> warehouses = new HashSet<>();
 
             for (Long warehouseId : workerDto.getWarehousesId()) {

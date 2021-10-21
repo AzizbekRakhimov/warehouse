@@ -25,6 +25,11 @@ public class WorkerController {
         return workerService.getAll(pageable);
     }
 
+    @GetMapping("/getByWarehouse/{id}")
+    public Page<Worker> workerPage(@PathVariable Long id, @PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable) {
+        return workerService.getByWarehouse(id, pageable);
+    }
+
     @PostMapping
     public ResponseData add(@RequestBody WorkerDto workerDto) {
         return workerService.save(workerDto);

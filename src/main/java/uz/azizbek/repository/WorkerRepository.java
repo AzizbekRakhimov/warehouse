@@ -20,4 +20,6 @@ public interface WorkerRepository extends JpaRepository<Worker, Long> {
     Optional<Worker> findByIdAndActiveTrue(Long id);
 
     Optional<Worker> findByPhoneNumberAndActiveFalse(String phoneNumber);
+
+    Page<Worker> findAllByWarehouseIdAndActiveTrue(Long warehouse_id, Pageable pageable);
 }
