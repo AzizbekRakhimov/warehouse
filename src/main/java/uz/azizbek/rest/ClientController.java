@@ -12,7 +12,7 @@ import uz.azizbek.model.Supplier;
 import uz.azizbek.service.ClientService;
 
 @RestController
-@RequestMapping("/supplier")
+@RequestMapping("/client")
 public class ClientController {
 
     @Autowired
