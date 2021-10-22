@@ -1,5 +1,6 @@
 package uz.azizbek.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,7 @@ public class Category{
     @Column(nullable = false)
     private String name;
 
+    @JsonIgnore
     private boolean active = true;
 
     @ManyToOne
