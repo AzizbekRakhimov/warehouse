@@ -40,7 +40,7 @@ public class MeasurementService {
 
     public ResponseData findOne(Long id) {
         Optional<Measurement> optionalMeasurement = measurementRepository.findByIdAndActiveTrue(id);
-        return optionalMeasurement.map(warehouse -> new ResponseData("Success", true, optionalMeasurement.get()))
+        return optionalMeasurement.map(measurement -> new ResponseData("Success", true, optionalMeasurement.get()))
                 .orElseGet(() -> new ResponseData("Warehouse does not exist", false));
 
     }
@@ -61,7 +61,7 @@ public class MeasurementService {
     public ResponseData edit(Long id, Measurement measurement) {
         Optional<Measurement> optionalMeasurement = measurementRepository.findByIdAndActiveTrue(id);
         if (optionalMeasurement.isEmpty()){
-            return new ResponseData("Warehouse does not exist", false);
+            return new ResponseData("Measurement does not exist", false);
         }
         Optional<Measurement> byName = measurementRepository.findByNameAndActiveFalse(measurement.getName());
         byName.ifPresent(value -> measurementRepository.delete(value));

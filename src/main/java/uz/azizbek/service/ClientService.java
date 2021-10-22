@@ -58,7 +58,7 @@ public class ClientService {
     public ResponseData edit(Long id, Client client) {
         Optional<Client> optionalClient = clientRepository.findByIdAndActiveTrue(id);
         if (optionalClient.isEmpty()) {
-            return new ResponseData("Supplier does not exist", false);
+            return new ResponseData("Client does not exist", false);
         }
         Optional<Client> byPhoneNumber = clientRepository.findByPhoneAndActiveFalse(client.getPhone());
         byPhoneNumber.ifPresent(value -> clientRepository.delete(value));
